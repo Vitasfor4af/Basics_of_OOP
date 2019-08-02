@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import by.epam.basicsOfOOP.task4.model.entity.DragonCave;
 import by.epam.basicsOfOOP.task4.model.entity.Treasure;
+import by.epam.basicsOfOOP.task4.view.TextFormatter;
 
 public class Logic {
 
@@ -25,14 +26,14 @@ public class Logic {
 		return "There are no treasures in the cave";
 	}
 
-	public static ArrayList<Treasure> getTreasureByPrice(DragonCave cave, long price) {
+	public static String getTreasureByPrice(DragonCave cave, long price) {
 		ArrayList<Treasure> newTreasureList = new ArrayList<Treasure>();
 		for (int i = 0; i < cave.getTreasureList().size(); i++) {
 			if (cave.getTreasureList().get(i).getPrice() == price) {
 				newTreasureList.add(cave.getTreasureByName(cave.getTreasureList().get(i).getName()));
 			}
 		}
-		return newTreasureList;
+		return TextFormatter.format(newTreasureList);
 	}
 
 	public static ArrayList<Treasure> treasureGenerator(DragonCave cave) {
@@ -48,5 +49,9 @@ public class Logic {
 			e.printStackTrace();
 		}
 		return cave.getTreasureList();
+	}
+
+	public static String getTreasureList(DragonCave cave) {
+		return TextFormatter.format(cave.getTreasureList());
 	}
 }

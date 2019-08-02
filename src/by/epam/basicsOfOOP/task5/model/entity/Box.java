@@ -84,6 +84,6 @@ public class Box {
 
 	@Override
 	public String toString() {
-		return "Box [type=" + type + ", flowerList=" + flowerList + "]";
+		return "Box [type=" + type + "]";
 	}
 }

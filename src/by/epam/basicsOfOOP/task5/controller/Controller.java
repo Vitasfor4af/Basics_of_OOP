@@ -2,10 +2,8 @@ package by.epam.basicsOfOOP.task5.controller;
 
 import java.util.Scanner;
 
-import by.epam.basicsOfOOP.task5.model.entity.Box;
-import by.epam.basicsOfOOP.task5.model.entity.Flower;
+import by.epam.basicsOfOOP.task5.logic.Logic;
 import by.epam.basicsOfOOP.task5.model.entity.FlowerComposition;
-import by.epam.basicsOfOOP.task5.view.TextFormatter;
 
 /* Цветочная композиция. Реализовать приложение, позволяющее создавать цветочные композиции
 (объект, представляющий собой цветочную композицию). Составляющими цветочной композиции
@@ -14,9 +12,6 @@ import by.epam.basicsOfOOP.task5.view.TextFormatter;
 public class Controller {
 
 	public static void main(String[] args) {
-		String type;
-		String name = "";
-		String color;
 		Scanner scanner = new Scanner(System.in);
 		String key = "";
 		FlowerComposition flowerComposition = new FlowerComposition();
@@ -28,47 +23,51 @@ public class Controller {
 			System.out.println("\t1 - get box list");
 			System.out.println("\t2 - add box");
 			System.out.println("\t3 - add flower to box");
-			System.out.println("\t3 - get flower list");
+			System.out.println("\t4 - get flower list");
 			System.out.println("\tc - exit");
 			switch (key = scanner.nextLine()) {
 			case "1":
-				System.out.println(TextFormatter.formatBoxList(flowerComposition.getBoxList()));
+				System.out.println(Logic.getBoxList(flowerComposition));
 				System.out.println("Do you wish to exit from program[Y/N]?");
 				key = scanner.nextLine();
-				if (key.equals("Y")) {
+				if (key.equals("Y") || key.equals("y")) {
 					scanner.close();
+				} else if (!(key.equals("N") || key.equals("n"))) {
+					doDefault(key, scanner);
 				}
 				break;
 			case "2":
 				System.out.println("Input box type");
-				type = scanner.nextLine();
-				flowerComposition.addBox(new Box(type));
+				Logic.addBox(flowerComposition, scanner.nextLine());
 				System.out.println("Do you wish to exit from program[Y/N]?");
 				key = scanner.nextLine();
-				if (key.equals("Y")) {
+				if (key.equals("Y") || key.equals("y")) {
 					scanner.close();
+				} else if (!(key.equals("N") || key.equals("n"))) {
+					doDefault(key, scanner);
 				}
 				break;
 			case "3":
-				System.out.println("Input name of flower");
-				name = scanner.nextLine();
-				scanner.nextLine();
-				System.out.println("Input color of flower");
-				color = scanner.nextLine();
-				flowerComposition.getBoxByType(name).addFlower(new Flower(name, color));;
-				scanner.nextLine();
+				System.out.println(
+						"Enter the type of box in which you want to add the flower, then the name and color of the flower, correspondingly.");
+				Logic.addFlowerToBox(flowerComposition, scanner.nextLine(), scanner.nextLine(), scanner.nextLine());
 				System.out.println("Do you wish to exit from program[Y/N]?");
 				key = scanner.nextLine();
-				if (key.equals("Y")) {
+				if (key.equals("Y") || key.equals("y")) {
 					scanner.close();
+				} else if (!(key.equals("N") || key.equals("n"))) {
+					doDefault(key, scanner);
 				}
 				break;
 			case "4":
-				System.out.println(TextFormatter.formatFlowerList(flowerComposition.getBoxByType(name).getFlowerList()));
+				System.out.println("Enter the type of box for which you want to get a list of flowers.");
+				System.out.println(Logic.getFlowerList(flowerComposition, scanner.nextLine()));
 				System.out.println("Do you wish to exit from program[Y/N]?");
 				key = scanner.nextLine();
-				if (key.equals("Y")) {
+				if (key.equals("Y") || key.equals("y")) {
 					scanner.close();
+				} else if (!(key.equals("N") || key.equals("n"))) {
+					doDefault(key, scanner);
 				}
 				break;
 			case "c":
@@ -80,15 +79,20 @@ public class Controller {
 				}
 				break;
 			default:
-				System.out.println("Unsupported key was pressed");
-				System.out.println("Do you wish to exit from program[Y/N]?");
-				key = scanner.nextLine();
-				if (key.equals("Y")) {
-					scanner.close();
-				}
+				doDefault(key, scanner);
 				break;
 			}
 		}
 	}
 
+	private static void doDefault(String key, Scanner scanner) {
+		System.out.println("Unsupported key was pressed");
+		System.out.println("Do you wish to exit from program[Y/N]?");
+		key = scanner.nextLine();
+		if (key.equals("Y")) {
+			scanner.close();
+		} else if (!(key.equals("N") || key.equals("n"))) {
+			doDefault(key, scanner);
+		}
+	}
 }
