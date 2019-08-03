@@ -6,6 +6,7 @@ import by.epam.basicsOfOOP.task5.model.entity.Box;
 import by.epam.basicsOfOOP.task5.model.entity.Flower;
 
 public class TextFormatter {
+	
 	public static String formatFlowerList(ArrayList<Flower> flowerList) {
 		String str = "";
 		for (int i = 0; i < flowerList.size(); i++) {

@@ -6,7 +6,6 @@ import by.epam.basicsOfOOP.task5.model.entity.FlowerComposition;
 import by.epam.basicsOfOOP.task5.view.TextFormatter;
 
 public class Logic {
-//заделегировать методы добавления и сделать обработку ошибок
 
 	public static String getBoxList(FlowerComposition flowerComposition) {
 		return TextFormatter.formatBoxList(flowerComposition.getBoxList());
