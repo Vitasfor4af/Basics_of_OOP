@@ -6,14 +6,14 @@ package by.epam.basicsOfOOP.task1;
 public class Main {
 
 	public static void main(String[] args) {
-
-		Directory directory = new Directory("C:/Program files");
-		directory.addFile(File.createFile("new File"));
-		directory.addFile(new File("Buka"));
-		directory.addFile(new TextFile("Right.txt"));
-		directory.getTextFileByName("Right.txt").addContent("OWOWOWOW");
-		directory.getTextFileByName("Right.txt").addContent("Omamama");
-		System.out.println(directory.getTextFileByName("Right.txt").outputText());
-		System.out.println(directory.getFileByName("new File").getFileName());
+		Directory directory = new Directory("E:/ProgramFiles/test");
+		directory.addFile(new File("Lern.py"));
+		directory.addFile(new TextFile("Lerk.txt"));
+		directory.getFileByName("Lern.py").add("ABCD");
+		directory.getFileByName("Lerk.txt").add("WOW");
+		System.out.println(directory.getFileByName("Lern.py").output());
+		System.out.println(directory.getFileByName("Lerk.txt").output());
+		directory.createFile("Lerk.txt");
+		
 	}
 }

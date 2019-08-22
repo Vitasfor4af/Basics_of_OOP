@@ -3,6 +3,10 @@ package by.epam.basicsOfOOP.task5var2.model.entity;
 public class Sweet {
 	private String name;
 
+	public Sweet() {
+		this.name = "Unnamed";
+	}
+
 	public Sweet(String name) {
 		this.name = name;
 	}

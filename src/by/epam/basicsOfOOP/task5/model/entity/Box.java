@@ -6,33 +6,12 @@ public class Box {
 	private String type;
 	ArrayList<Flower> flowerList = new ArrayList<Flower>();
 
+	public Box() {
+		this.type = "Undefined";
+	}
+
 	public Box(String type) {
 		this.type = type;
-	}
-
-	public void addFlower(Flower flower) {
-		if (flower != null) {
-			flowerList.add(flower);
-		}
-	}
-
-	public void removeFlower(Flower flower) {
-		if (flower != null) {
-			flowerList.remove(flower);
-		}
-	}
-
-	public Flower getFlowerByName(String name) {
-		Flower flower = null;
-		if (name != null) {
-			for (int i = 0; i < flowerList.size(); i++) {
-				if (flowerList.get(i).getName().equals(name)) {
-					flower = flowerList.get(i);
-					break;
-				}
-			}
-		}
-		return flower;
 	}
 
 	public String getType() {

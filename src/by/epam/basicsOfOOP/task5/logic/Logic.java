@@ -7,13 +7,9 @@ import by.epam.basicsOfOOP.task5.view.TextFormatter;
 
 public class Logic {
 
-	public static String getBoxList(FlowerComposition flowerComposition) {
-		return TextFormatter.formatBoxList(flowerComposition.getBoxList());
-	}
-
-	public static void addBox(FlowerComposition flowerComposition, String type) {
+	public static void addBoxToList(FlowerComposition flowerComposition, String type) {
 		if (type.matches("\\p{IsLatin}+")) {
-			flowerComposition.addBox(new Box(type));
+			addBox(flowerComposition, new Box(type));
 		} else {
 			throw new IllegalArgumentException("only Latin characters are allowed");
 		}
@@ -23,17 +19,67 @@ public class Logic {
 			String flowerColor) {
 		if (type.matches("\\p{IsLatin}+") && flowerName.matches("\\p{IsLatin}+")
 				&& flowerColor.matches("\\p{IsLatin}+")) {
-			flowerComposition.getBoxByType(type).addFlower(new Flower(flowerName, flowerColor));
+			addFlower(getBoxByType(flowerComposition, type), new Flower(flowerName, flowerColor));
 		} else {
 			throw new IllegalArgumentException("only Latin characters are allowed");
 		}
+	}
+
+	public static void addBox(FlowerComposition flowerComposition, Box box) {
+		if (box != null) {
+			flowerComposition.getBoxList().add(box);
+		}
+	}
+
+	public static void removeBox(FlowerComposition flowerComposition, Box box) {
+		if (box != null) {
+			flowerComposition.getBoxList().remove(box);
+		}
+	}
+
+	public static Box getBoxByType(FlowerComposition flowerComposition, String type) {
+		Box box = null;
+		if (type != null) {
+			for (int i = 0; i < flowerComposition.getBoxList().size(); i++) {
+				if (flowerComposition.getBoxList().get(i).getType().equals(type)) {
+					box = flowerComposition.getBoxList().get(i);
+					break;
+				}
+			}
+		}
+		return box;
+	}
+
+	public static void addFlower(Box box, Flower flower) {
+		if (flower != null) {
+			box.getFlowerList().add(flower);
+		}
+	}
+
+	public static void removeFlower(Box box, Flower flower) {
+		if (flower != null) {
+			box.getFlowerList().remove(flower);
+		}
+	}
+
+	public static Flower getFlowerByName(Box box, String name) {
+		Flower flower = null;
+		if (name != null) {
+			for (int i = 0; i < box.getFlowerList().size(); i++) {
+				if (box.getFlowerList().get(i).getName().equals(name)) {
+					flower = box.getFlowerList().get(i);
+					break;
+				}
+			}
+		}
+		return flower;
 	}
 
 	public static String getFlowerList(FlowerComposition flowerComposition, String type) {
 		if (!(type.matches("\\p{IsLatin}+"))) {
 			throw new IllegalArgumentException("only Latin characters are allowed");
 		}
-		return TextFormatter.formatFlowerList(flowerComposition.getBoxByType(type).getFlowerList());
+		return TextFormatter.formatFlowerList(getBoxByType(flowerComposition, type).getFlowerList());
 	}
 
 }

@@ -3,7 +3,12 @@ package by.epam.basicsOfOOP.task4.model.entity;
 public class Treasure {
 	private String name;
 	private long price;
-	
+
+	public Treasure() {
+		this.name = "Unnamed";
+		this.price = 0;
+	}
+
 	public Treasure(String name, long price) {
 		this.name = name;
 		this.price = price;
@@ -56,5 +61,5 @@ public class Treasure {
 	@Override
 	public String toString() {
 		return "Treasure [name=" + name + ", price=" + price + "]";
-	}	
+	}
 }

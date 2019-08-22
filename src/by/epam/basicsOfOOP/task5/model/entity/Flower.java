@@ -4,6 +4,11 @@ public class Flower {
 	private String name;
 	private String color;
 
+	public Flower() {
+		this.name = "Unnamed";
+		this.color = "Undefined";
+	}
+
 	public Flower(String name, String color) {
 		this.name = name;
 		this.color = color;

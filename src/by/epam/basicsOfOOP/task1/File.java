@@ -2,17 +2,26 @@ package by.epam.basicsOfOOP.task1;
 
 public class File {
 	private String name;
+	private byte[] bodyText;
 
-	public File(String name) {
-		this.name = name;
+	public File(String name) {	
+		if (name.matches("^\\w+\\.[a-z]{2,4}$")) {
+			this.name = name;
+		} else {
+			throw new IllegalAccessError("invalid file name");
+		}
 	}
 
-	public static File createFile(String name) {
-		File file = null;
-		if (name != null) {
-			file = new File(name);
-		}
-		return file;
+	public void add(String text) {
+		this.bodyText = text.getBytes();			
+	}
+	
+	public void remove() {
+		this.bodyText = null;
+	}
+	
+	public String output() {
+		return new String(bodyText);
 	}
 	
 	public String getFileName() {

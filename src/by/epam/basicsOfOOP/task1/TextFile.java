@@ -9,17 +9,22 @@ public class TextFile extends File {
 
 	public TextFile(String name) {
 		super(name);
+		if (name.matches("^\\w+\\.(txt)$")) {
+			setFileName(name);
+		} else {
+			throw new IllegalAccessError("invalid file name for text file");
+		}
 	}
 
-	public void addContent(String text) {
+	public void add(String text) {
 		bodyText += text + "\n";
 	}
 
-	public void deleteContent() {
+	public void remove() {
 		bodyText = "";
 	}
 
-	public String outputText() {
+	public String output() {
 		return bodyText;
 	}
 }

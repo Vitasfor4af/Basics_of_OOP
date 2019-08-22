@@ -1,86 +1,50 @@
 package by.epam.basicsOfOOP.task1;
 
-public class Directory {
-	private final int DEFAULT = 5;
-	private String name;
-	private File[] files;
+import java.util.ArrayList;
 
-	{
-		files = new File[DEFAULT];
-	}
+public class Directory {
+
+	private String name;
+	ArrayList<File> fileList = new ArrayList<File>();
 
 	public Directory(String name) {
-		this.name = name;
+		if (name.matches("\\p{Upper}:(/\\w+)+")) {
+			this.name = name;
+		} else {
+			throw new IllegalAccessError("Invalid path of directory");
+		}
+	}
+
+	public File createFile(String name) {
+		if (name != null) {
+			return new File(name);
+		}
+		return null;
 	}
 
 	public void addFile(File file) {
 		if (file != null) {
-			for (int i = 0; i < files.length; i++) {
-				if (files[i] == null) {
-					files[i] = file;
-					break;
-				}
-			}
-		}
-	}
-	
-	public void addFile(TextFile file) {
-		if (file != null) {
-			for (int i = 0; i < files.length; i++) {
-				if (files[i] == null) {
-					files[i] = file;
-					break;
-				}
-			}
+			fileList.add(file);
 		}
 	}
 
 	public void removeFile(File file) {
 		if (file != null) {
-			for (int i = 0; i < files.length; i++) {
-				if (files[i] != null && files[i].equals(file)) {
-					files[i] = null;
-					break;
-				}
-			}
-		}
-	}
-	
-	public void removeFile(TextFile file) {
-		if (file != null) {
-			for (int i = 0; i < files.length; i++) {
-				if (files[i] != null && files[i].equals(file)) {
-					files[i] = null;
-					break;
-				}
-			}
+			fileList.remove(file);
 		}
 	}
 
 	public File getFileByName(String name) {
 		File file = null;
 		if (name != null) {
-			for (int i = 0; i < files.length; i++) {
-				if (files[i].getFileName().equals(name)) {
-					file = files[i];
+			for (int i = 0; i < fileList.size(); i++) {
+				if (fileList.get(i).getFileName().equals(name)) {
+					file = fileList.get(i);
 					break;
 				}
 			}
 		}
 		return file;
-	}
-
-	public TextFile getTextFileByName(String name) {
-		TextFile textFile = null;
-		if (name != null) {
-			for (int i = 0; i < files.length; i++) {
-				if (files[i].getFileName().equals(name)) {
-					textFile = (TextFile) files[i];
-					break;
-				}
-			}
-		}
-		return textFile;
 	}
 
 	public String getDirectoryName() {
