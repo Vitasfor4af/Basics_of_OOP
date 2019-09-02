@@ -14,6 +14,31 @@ public class Box {
 		this.type = type;
 	}
 
+	public void addSweet(Sweet sweet) {
+		if (sweet != null) {
+			sweetList.add(sweet);
+		}
+	}
+
+	public void removeSweet(Sweet sweet) {
+		if (sweet != null) {
+			sweetList.remove(sweet);
+		}
+	}
+
+	public Sweet getSweetByName(String name) {
+		Sweet sweet = null;
+		if (name != null) {
+			for (int i = 0; i < sweetList.size(); i++) {
+				if (sweetList.get(i).getName().equals(name)) {
+					sweet = sweetList.get(i);
+					break;
+				}
+			}
+		}
+		return sweet;
+	}
+
 	public String getType() {
 		return type;
 	}

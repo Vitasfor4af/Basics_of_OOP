@@ -16,21 +16,21 @@ public class Controller {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
 		String key = "";
+		long price;
 		DragonCave cave = new DragonCave();
+		Dao.addTreasures(cave);
 		while (!(key.equals("Y") || key.equals("y"))) {
 			System.out.println("-------------------------------------------");
 			System.out.println("###########################################");
 			System.out.println("-------------------------------------------");
 			System.out.println("\t\t***MENU***");
-			System.out.println("\t1 - generate treasures");
-			System.out.println("\t2 - get treasures list");
-			System.out.println("\t3 - get the most expensive treasure");
-			System.out.println("\t4 - get treasures for a given price");
+			System.out.println("\t1 - get treasures list");
+			System.out.println("\t2 - get the most expensive treasure");
+			System.out.println("\t3 - get treasures for a given price");
 			System.out.println("\tc - exit");
 			switch (key = scanner.nextLine()) {
 			case "1":
-				Dao.treasureGenerator(cave);
-				System.out.println("Treasures have been added");
+				System.out.println(TextFormatter.format(cave.getTreasureList()));
 				System.out.println("Do you wish to exit from program[Y/N]?");
 				key = scanner.nextLine();
 				if (key.equals("Y") || key.equals("y")) {
@@ -40,20 +40,6 @@ public class Controller {
 				}
 				break;
 			case "2":
-				if (TextFormatter.format(cave.getTreasureList()).equals("")) {
-					System.out.println("Treasures have not been added, generate them before displaying them.");
-				} else {
-					System.out.println(TextFormatter.format(cave.getTreasureList()));
-				}
-				System.out.println("Do you wish to exit from program[Y/N]?");
-				key = scanner.nextLine();
-				if (key.equals("Y") || key.equals("y")) {
-					scanner.close();
-				} else if (!(key.equals("N") || key.equals("n"))) {
-					doDefault(key, scanner);
-				}
-				break;
-			case "3":
 				System.out.println(Logic.getMostExpensiveTreasure(cave));
 				System.out.println("Do you wish to exit from program[Y/N]?");
 				key = scanner.nextLine();
@@ -63,9 +49,10 @@ public class Controller {
 					doDefault(key, scanner);
 				}
 				break;
-			case "4":
+			case "3":
 				System.out.println("Input price");
-				System.out.println(TextFormatter.format(Dao.getTreasureByPrice(scanner.nextLong())));
+				price = scanner.nextLong();
+				System.out.println(TextFormatter.format(Dao.getTreasureByPrice(price)));
 				scanner.nextLine();
 				System.out.println("Do you wish to exit from program[Y/N]?");
 				key = scanner.nextLine();
@@ -79,9 +66,7 @@ public class Controller {
 			case "C":
 				System.out.println("Exit from program");
 				key = "Y";
-				if (key.equals("Y")) {
-					scanner.close();
-				}
+				scanner.close();
 				break;
 			default:
 				doDefault(key, scanner);
@@ -91,9 +76,9 @@ public class Controller {
 	}
 
 	private static void doDefault(String key, Scanner scanner) {
-		System.out.println("Unsupported key was pressed");
-		System.out.println("Do you want to go back [Y]?");
-		key = scanner.nextLine();
+		System.out.println("Unsupported key was pressed\npress Enter to return");
+		scanner.nextLine();
+		key = "Y";
 		if (key.equals("Y") || key.equals("y")) {
 			return;
 		} else if (!(key.equals("Y") || key.equals("y"))) {

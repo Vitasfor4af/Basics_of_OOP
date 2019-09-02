@@ -9,7 +9,7 @@ public class Logic {
 
 	public static void addBoxToList(Gift gift, String type) {
 		if (type.matches("\\p{IsLatin}+")) {
-			addBox(gift, new Box(type));
+			gift.addBox(new Box(type));
 		} else {
 			throw new IllegalArgumentException("only Latin characters are allowed");
 		}
@@ -17,66 +17,16 @@ public class Logic {
 
 	public static void addSweetToBox(Gift gift, String type, String sweetName) {
 		if (type.matches("\\p{IsLatin}+") && sweetName.matches("\\p{IsLatin}+")) {
-			addSweet(getBoxByType(gift, type), new Sweet(sweetName));
+			gift.getBoxByType(type).addSweet(new Sweet(sweetName));
 		} else {
 			throw new IllegalArgumentException("only Latin characters are allowed");
 		}
-	}
-
-	public static void addBox(Gift gift, Box box) {
-		if (box != null) {
-			gift.getBoxList().add(box);
-		}
-	}
-
-	public static void removeBox(Gift gift, Box box) {
-		if (box != null) {
-			gift.getBoxList().remove(box);
-		}
-	}
-
-	public static Box getBoxByType(Gift gift, String name) {
-		Box box = null;
-		if (name != null) {
-			for (int i = 0; i < gift.getBoxList().size(); i++) {
-				if (gift.getBoxList().get(i).getType().equals(name)) {
-					box = gift.getBoxList().get(i);
-					break;
-				}
-			}
-		}
-		return box;
-	}
-
-	public static void addSweet(Box box, Sweet sweet) {
-		if (sweet != null) {
-			box.getSweetList().add(sweet);
-		}
-	}
-
-	public static void removeSweet(Box box, Sweet sweet) {
-		if (sweet != null) {
-			box.getSweetList().remove(sweet);
-		}
-	}
-
-	public static Sweet getSweetByName(Box box, String name) {
-		Sweet sweet = null;
-		if (name != null) {
-			for (int i = 0; i < box.getSweetList().size(); i++) {
-				if (box.getSweetList().get(i).getName().equals(name)) {
-					sweet = box.getSweetList().get(i);
-					break;
-				}
-			}
-		}
-		return sweet;
 	}
 
 	public static String getSweetList(Gift gift, String type) {
 		if (!(type.matches("\\p{IsLatin}+"))) {
 			throw new IllegalArgumentException("only Latin characters are allowed");
 		}
-		return TextFormatter.formatSweetList(getBoxByType(gift, type).getSweetList());
+		return TextFormatter.formatSweetList(gift.getBoxByType(type).getSweetList());
 	}
 }

@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import by.epam.basicsOfOOP.task4.logic.Logic;
 import by.epam.basicsOfOOP.task4.model.entity.DragonCave;
 import by.epam.basicsOfOOP.task4.model.entity.Treasure;
 
@@ -16,11 +15,11 @@ public class Dao {
 
 	private static final String FILE_PATH = "src/by/epam/basicsOfOOP/task4/resources/treasureList";
 
-	public static void treasureGenerator(DragonCave cave) {
+	public static void addTreasures(DragonCave cave) {
 		String line = "";
 		try (BufferedReader br = new BufferedReader(new FileReader(FILE_PATH))) {
 			while ((line = br.readLine()) != null) {
-				Logic.addTreasure(cave, new Treasure(line.substring(0, line.lastIndexOf(" ")),
+				cave.addTreasure(new Treasure(line.substring(0, line.lastIndexOf(" ")),
 						Long.parseLong(line.substring(line.lastIndexOf(" ") + 1))));
 			}
 		} catch (IOException e) {

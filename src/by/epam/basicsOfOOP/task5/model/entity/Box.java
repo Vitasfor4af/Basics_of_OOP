@@ -14,6 +14,31 @@ public class Box {
 		this.type = type;
 	}
 
+	public void addFlower(Flower flower) {
+		if (flower != null) {
+			flowerList.add(flower);
+		}
+	}
+
+	public void removeFlower(Flower flower) {
+		if (flower != null) {
+			flowerList.remove(flower);
+		}
+	}
+
+	public Flower getFlowerByName(String name) {
+		Flower flower = null;
+		if (name != null) {
+			for (int i = 0; i < flowerList.size(); i++) {
+				if (flowerList.get(i).getName().equals(name)) {
+					flower = flowerList.get(i);
+					break;
+				}
+			}
+		}
+		return flower;
+	}
+
 	public String getType() {
 		return type;
 	}
