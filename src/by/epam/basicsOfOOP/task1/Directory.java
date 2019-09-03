@@ -15,11 +15,16 @@ public class Directory {
 		}
 	}
 
-	public File createFile(String name) {
+	public boolean createFile(String name) {
+		File file = null;
 		if (name != null) {
-			return new File(name);
+			file = new File(name);
+			addFile(file);
 		}
-		return null;
+		if(file != null) {
+			return true;
+		}
+		return false;
 	}
 
 	public void addFile(File file) {

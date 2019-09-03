@@ -4,7 +4,7 @@ public class File {
 	private String name;
 	private byte[] bodyText;
 
-	public File(String name) {	
+	public File(String name) {
 		if (name.matches("^\\w+\\.[a-z]{2,4}$")) {
 			this.name = name;
 		} else {
@@ -12,18 +12,18 @@ public class File {
 		}
 	}
 
-	public void add(String text) {
-		this.bodyText = text.getBytes();			
+	public void addContent(String text) {
+		this.bodyText = text.getBytes();
 	}
-	
-	public void remove() {
+
+	public void removeContent() {
 		this.bodyText = null;
 	}
-	
+
 	public String output() {
 		return new String(bodyText);
 	}
-	
+
 	public String getFileName() {
 		return name;
 	}

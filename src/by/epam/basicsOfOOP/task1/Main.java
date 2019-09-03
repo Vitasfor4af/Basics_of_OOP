@@ -9,11 +9,14 @@ public class Main {
 		Directory directory = new Directory("E:/ProgramFiles/test");
 		directory.addFile(new File("Lern.py"));
 		directory.addFile(new TextFile("Lerk.txt"));
-		directory.getFileByName("Lern.py").add("ABCD");
-		directory.getFileByName("Lerk.txt").add("WOW");
+		directory.createFile("Doc.txt");
+		directory.getFileByName("Lern.py").addContent("ABCD");
+		directory.getFileByName("Lerk.txt").addContent("WOW");
+		directory.getFileByName("Doc.txt").addContent("gkr");
+		directory.getFileByName("Lerk.txt").addContent("sup");
 		System.out.println(directory.getFileByName("Lern.py").output());
 		System.out.println(directory.getFileByName("Lerk.txt").output());
-		directory.createFile("Lerk.txt");
+		System.out.println(directory.getFileByName("Doc.txt").output());
 		
 	}
 }

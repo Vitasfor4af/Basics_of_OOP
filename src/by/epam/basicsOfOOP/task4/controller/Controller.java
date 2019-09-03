@@ -18,7 +18,7 @@ public class Controller {
 		String key = "";
 		long price;
 		DragonCave cave = new DragonCave();
-		Dao.addTreasures(cave);
+		Logic.addTreasures(cave);
 		while (!(key.equals("Y") || key.equals("y"))) {
 			System.out.println("-------------------------------------------");
 			System.out.println("###########################################");

@@ -16,11 +16,11 @@ public class TextFile extends File {
 		}
 	}
 
-	public void add(String text) {
-		bodyText += text + "\n";
+	public void addContent(String text) {
+		bodyText += text + " ";
 	}
 
-	public void remove() {
+	public void removeContent() {
 		bodyText = "";
 	}
 
